@@ -1,12 +1,18 @@
 import { useState } from 'react'
-import './App.css'
+import './globals.css'
+import { Route, Routes } from 'react-router-dom'
 
 function App() {
 
   return (
     <>
-    this is awesome
-    siuu hh sisjn laklsklas
+<Routes>
+{/* <Route exact path='/' element={<Home/>} /> */}
+{/* <Route exact path='/login' element={<Login/>} />
+<Route exact path='/signup' element={<Signup/>} /> */}
+
+</Routes>
+
     </>
   )
 }
