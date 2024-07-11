@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 // import Link from "next/link"
 import { Button } from "@/components/ui/button";
 import {
@@ -12,9 +12,15 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Link } from "react-router-dom";
 import { Field, Form, Formik } from "formik";
+import { useToast } from "@/components/ui/use-toast";
+import { ID, account } from "@/Appwrite/AppwriteConfig";
+import { Loader2 } from "lucide-react";
 
 const SignUp = () => {
+  const [loading, setLoading] = useState(false);
+  const { toast } = useToast();
   const onSubmit = async (data) => {
+    setLoading(true)
     try {
       const result = await account.create(
         ID.unique(),
@@ -22,7 +28,19 @@ const SignUp = () => {
         data?.password,
         data?.name
       );
-    } catch (error) {}
+      setLoading(false);
+      toast({
+        variant: "success",
+        description: "Account created successfully.",
+      });
+    } catch (error) {
+      toast({
+        variant: "destructive",
+        description: "Something went wrong.",
+      });
+      setLoading(false);
+
+    }
   };
   return (
     <div className="w-full h-screen flex justify-center items-center">
@@ -36,7 +54,7 @@ const SignUp = () => {
         <CardContent>
           <Formik
             initialValues={{ first_name: "",last_name: "" , email: "", password: "" }}
-            //   onSubmit={onSubmit}
+              onSubmit={onSubmit}
           >
             <Form>
                 
@@ -71,7 +89,8 @@ const SignUp = () => {
                 <Field as={Input}  id="password" name="password" type="password" placeholder={"Password"} required/>
 
               </div>
-              <Button type="submit" className="w-full">
+              <Button type="submit"  disable={loading}  className="w-full">
+              {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
                 Create an account
               </Button>
               <Button variant="outline" className="w-full">
