@@ -7,6 +7,7 @@ import { Toaster } from './components/ui/toaster'
 import Login from './pages/Login'
 import PrivateRoutes from './pages/PrivateRoutes'
 import Homes from './components/Homes'
+import PublicRoutes from './pages/PublicRoutes'
 
 function App() {
 
@@ -19,8 +20,11 @@ function App() {
 
 </Route>
 
+<Route element={<PublicRoutes />} >
 <Route exact path='/signup' element={<SignUp/>} />
 <Route exact path='/login' element={<Login/>} />
+
+</Route>
 
 </Routes>
 <Toaster />
