@@ -46,8 +46,11 @@ import {
 } from "@/components/ui/tooltip"
 import { Link } from "react-router-dom"
 import { TooltipProvider } from "@radix-ui/react-tooltip"
+import { useContext } from "react"
+import { Context } from "@/Context/Context"
 
 export function Layout({children}) {
+  const {onLogout} = useContext(Context)
   return (
     <div className="flex min-h-screen w-full flex-col bg-muted/40">
       <aside className="fixed inset-y-0 left-0 z-10 hidden w-14 flex-col border-r bg-background sm:flex">
@@ -244,7 +247,7 @@ export function Layout({children}) {
               <DropdownMenuItem>Settings</DropdownMenuItem>
               <DropdownMenuItem>Support</DropdownMenuItem>
               <DropdownMenuSeparator />
-              <DropdownMenuItem>Logout</DropdownMenuItem>
+              <DropdownMenuItem onClick={onLogout}>Logout</DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
         </header>
