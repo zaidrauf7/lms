@@ -18,6 +18,7 @@ function App() {
 
 <Route element={<PrivateRoutes/>}>
 <Route path='/' element={<Homes/>}/>
+<Route path='/registeration' element={<Register/>}/>
 
 </Route>
 
