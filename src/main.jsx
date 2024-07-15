@@ -10,9 +10,9 @@ ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <BrowserRouter>
   <ContextProvider>
-  <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
+  {/* <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme"> */}
     <App />
-    </ThemeProvider>
+    {/* </ThemeProvider> */}
     </ContextProvider>
     </BrowserRouter>
   </React.StrictMode>,
