@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Label } from "@/components/ui/label";
-import { Field, Form, Formik, useFormik } from "formik";
+import { Field, Form, Formik } from "formik";
 import { Input } from "./ui/input";
 import { useToast } from "./ui/use-toast";
 import { COLLECTION_ID_STUDENTDATA, DATABASE_ID, databases, ID } from "@/Appwrite/AppwriteConfig";
@@ -12,7 +12,7 @@ const Information = () => {
   const [loading, setLoading] = useState(false);
   const { toast } = useToast();
 
-  const onSubmit = async (data) => {
+  const onSubmit = async (data, { resetForm }) => {
     setLoading(true);
     try {
       const promise = databases.createDocument(
@@ -20,24 +20,25 @@ const Information = () => {
         COLLECTION_ID_STUDENTDATA,
         ID.unique(),
         {
-          'firstname':data?.firstname ,
-            "lastname":data?.lastname,
-            'dob': data?.dob,
-            "gender": data?.gender,
-            "phonenumber":data?.phonenumber,
-            "homeaddress": data?.homeaddress,
-            "stdid": data?.stdid,
-            "guardianname":data?.guardianname,
-            "releation": data?.releation,
-            "contactno": data?.contactno
+          'firstname': data?.firstname,
+          'lastname': data?.lastname,
+          'dob': data?.dob,
+          'gender': data?.gender,
+          'phonenumber': data?.phonenumber,
+          'homeaddress': data?.homeaddress,
+          'stdid': data?.stdid,
+          'guardianname': data?.guardianname,
+          'releation': data?.releation,
+          'contactno': data?.contactno
         }
-    );
-    console.log(data.firstname)
+      );
+      console.log(data.firstname)
       setLoading(false);
       toast({
         variant: "success",
         description: "Account created successfully.",
       });
+      resetForm(); // Reset the form fields after successful submission
     } catch (error) {
       toast({
         variant: "destructive",
@@ -63,7 +64,7 @@ const Information = () => {
             releation: "",
             contactno: ""
           }}
-            onSubmit={onSubmit}
+          onSubmit={onSubmit}
         >
           <Form>
             <div className="grid grid-cols-2 gap-4 mb-4">
@@ -95,9 +96,9 @@ const Information = () => {
                 <Label htmlFor="first-name">Date of Birth</Label>
                 <Field
                   as={Input}
-                  id="Dob"
+                  id="dob"
                   name="dob"
-                  type="text"
+                  type="date"
                   placeholder={"Date of Birth"}
                   required
                 />
@@ -109,7 +110,7 @@ const Information = () => {
                   id="gender"
                   name="gender"
                   type="text"
-                  placeholder={"gender"}
+                  placeholder={"Gender"}
                   required
                 />
               </div>
@@ -150,11 +151,6 @@ const Information = () => {
                   required
                 />
               </div>
-              {/* <div className="grid gap-2">
-                  <Label htmlFor="last-name">Home Address</Label>
-                  <Field as={Input} id="last-name" name="last_name" type="text" placeholder={"45 Ghalib Road"} required/>
-
-                </div> */}
             </div>
             <div>
               <h1 className="text-xl font-semibold my-6">
@@ -198,10 +194,10 @@ const Information = () => {
                 />
               </div>
             </div>
-            <Button type="submit"  disable={loading}  className="w-full">
+            <Button type="submit" disabled={loading} className="w-full">
               {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-                Submit
-              </Button>
+              Submit
+            </Button>
           </Form>
         </Formik>
       </div>
@@ -209,4 +205,4 @@ const Information = () => {
   );
 };
 
-export default Information;
+export default Information;
