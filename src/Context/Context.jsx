@@ -19,7 +19,9 @@ const ContextProvider = (props) =>{
       navigate("/login");
     };
 
-// GET STUDENT DATA
+//  STUDENT DATA
+
+// GET DATA
 const [studentData,setStudentData] = useState([])
 
 const fetchStudentData = async () =>{
@@ -34,11 +36,23 @@ useEffect(() =>{
 fetchStudentData()
 },[])
 
+// DELETE DATA
+const studentDelete = async (student_id) => {
+    await databases.deleteDocument(
+      DATABASE_ID,
+      COLLECTION_ID_STUDENTDATA,
+      student_id
+    );
+    setStudentData((prevStudent) =>
+      prevStudent.filter((student) => student.id !== student_id)
+    );
+  };
 
 
     const contextValue = {
         onLogout,
-        studentData
+        studentData,
+        studentDelete
     }
 
     return(
