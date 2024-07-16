@@ -1,6 +1,6 @@
-import { account } from "@/Appwrite/AppwriteConfig";
+import { account, COLLECTION_ID_STUDENTDATA, DATABASE_ID, databases } from "@/Appwrite/AppwriteConfig";
 import useLocalStorage from "@/hooks/useLocalStorage";
-import { createContext } from "react";
+import { createContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 export const Context = createContext()
@@ -18,9 +18,27 @@ const ContextProvider = (props) =>{
       removeItem("user");
       navigate("/login");
     };
-    const contextValue = {
 
-        onLogout
+// GET STUDENT DATA
+const [studentData,setStudentData] = useState([])
+
+const fetchStudentData = async () =>{
+const promise = await databases.listDocuments(
+    DATABASE_ID,
+    COLLECTION_ID_STUDENTDATA
+)
+setStudentData(promise.documents)
+}
+
+useEffect(() =>{
+fetchStudentData()
+},[])
+
+
+
+    const contextValue = {
+        onLogout,
+        studentData
     }
 
     return(
