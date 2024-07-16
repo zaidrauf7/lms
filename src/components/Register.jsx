@@ -47,7 +47,7 @@ import { Link } from "react-router-dom";
 import { Context } from "@/Context/Context";
 
 const Register = () => {
-  const { studentData } = useContext(Context);
+  const { studentData,studentDelete } = useContext(Context);
 
   return (
     <div className="w-full">
@@ -174,15 +174,14 @@ const Register = () => {
                               <DropdownMenuContent align="end">
                                 <DropdownMenuLabel>Actions</DropdownMenuLabel>
                                 <DropdownMenuItem>Edit</DropdownMenuItem>
-                                <DropdownMenuItem>Delete</DropdownMenuItem>
+                                <DropdownMenuItem onClick={() => studentDelete(stdData.$id)} >Delete</DropdownMenuItem>
                               </DropdownMenuContent>
                             </DropdownMenu>
                           </TableCell>
                           </TableRow>
                       );
                     })}
-                  
-                </TableBody>
+                 </TableBody>
               </Table>
             </CardContent>
             <CardFooter>
