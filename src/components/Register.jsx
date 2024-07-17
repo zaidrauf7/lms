@@ -47,7 +47,7 @@ import { Link } from "react-router-dom";
 import { Context } from "@/Context/Context";
 
 const Register = () => {
-  const { studentData,studentDelete } = useContext(Context);
+  const { studentData,studentDelete,setDocumentId } = useContext(Context);
 
   return (
     <div className="w-full">
@@ -173,7 +173,7 @@ const Register = () => {
                               </DropdownMenuTrigger>
                               <DropdownMenuContent align="end">
                                 <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                                <DropdownMenuItem>Edit</DropdownMenuItem>
+                                <DropdownMenuItem onClick={() => setDocumentId(stdData.$id)}><Link to={`/editstudent/${stdData.stdid}`}>Edit</Link></DropdownMenuItem>
                                 <DropdownMenuItem onClick={() => studentDelete(stdData.$id)} >Delete</DropdownMenuItem>
                               </DropdownMenuContent>
                             </DropdownMenu>
