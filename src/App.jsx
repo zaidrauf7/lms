@@ -8,6 +8,7 @@ import Homes from './components/Homes'
 import PublicRoutes from './pages/PublicRoutes'
 import Register from './components/Register'
 import RegisterUser from './components/RegisterUser'
+import EditStudentData from './components/EditStudentData'
 
 function App() {
 
@@ -18,6 +19,7 @@ function App() {
 <Route path='/' element={<Homes/>}/>
 <Route path='/registeration' element={<Register/>}/>
 <Route path='/registeration/registeruser' element={<RegisterUser/>}/>
+<Route path='/editstudent/:id' element={<EditStudentData/>}/>
 
 </Route>
 

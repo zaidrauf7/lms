@@ -47,12 +47,16 @@ const studentDelete = async (student_id) => {
       prevStudent.filter((student) => student.id !== student_id)
     );
   };
+  //  EDIT STUDENT DATA
+  const [documentId,setDocumentId] = useState("")
 
 
     const contextValue = {
         onLogout,
         studentData,
-        studentDelete
+        studentDelete,
+        setDocumentId,
+        documentId
     }
 
     return(
