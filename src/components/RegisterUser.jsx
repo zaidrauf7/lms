@@ -1,4 +1,3 @@
-import SignUp from "@/pages/SignUp";
 import React from "react";
 import Information from "./Information";
 import { Button } from "./ui/button";
