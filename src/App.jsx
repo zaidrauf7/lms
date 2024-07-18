@@ -24,7 +24,6 @@ function App() {
 </Route>
 
 <Route element={<PublicRoutes />} >
-<Route exact path='/signup' element={<SignUp/>} />
 <Route exact path='/login' element={<Login/>} />
 
 </Route>

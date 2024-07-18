@@ -11,11 +11,9 @@ const RegisterUser = () => {
             
         </div>
         <Information/>
-      <div>
-        <h1 className="text-xl font-semibold my-8">Sign Up Process</h1>
-      </div>
-      <SignUp />
-      <div className="flex justify-end mt-4 mr-8"><Button>Done</Button></div>
+     
+      {/* <SignUp /> */}
+      {/* <div className="flex justify-end mt-4 mr-8"><Button>Done</Button></div> */}
     </div>
   );
 };
