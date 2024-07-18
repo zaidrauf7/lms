@@ -1,15 +1,17 @@
-import useLocalStorage from "@/hooks/useLocalStorage";
-import React from "react";
-import { Navigate, Outlet } from "react-router-dom";
+import React from 'react'
+import useLocalStorage from '../hooks/useLocalStorage'
+import { Navigate, Outlet } from 'react-router-dom'
 
-const PublicRoutes = () => {
-  const { getItem } = useLocalStorage();
-  const user = getItem("cookieFallback");
-  return user ? (
-    <Navigate to={"/"} />
-  ) : (
-    <Outlet />
-  );
-};
+const PublicRoute = () => {
+const { getItem } = useLocalStorage()
+const user = getItem("user")
+    return user ? (
+        (<Navigate to={"/"} />)
 
-export default PublicRoutes;
+    
+
+    
+  ):<Outlet/> 
+}
+
+export default PublicRoute

@@ -9,15 +9,15 @@ export const Context = createContext()
 const ContextProvider = (props) =>{
     
     
-    const { removeItem, getItem } = useLocalStorage();
-    const user = getItem("cookieFallback");
     const navigate = useNavigate();
   
-    const onLogout = async () => {
-      await account.deleteSession("current");
-      removeItem("user");
-      navigate("/login");
-    };
+    const {removeItem} = useLocalStorage()
+    const onLogout = () =>{
+        account.deleteSession("current");
+        removeItem("user");
+        // navigate("/login") 
+    }
+    
 
 //  STUDENT DATA
 
