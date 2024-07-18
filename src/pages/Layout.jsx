@@ -48,6 +48,7 @@ import { Link } from "react-router-dom"
 import { TooltipProvider } from "@radix-ui/react-tooltip"
 import { useContext } from "react"
 import { Context } from "@/Context/Context"
+import { FaRegUserCircle } from "react-icons/fa";
 
 export function Layout({children}) {
   const {onLogout} = useContext(Context)
@@ -90,7 +91,7 @@ export function Layout({children}) {
           <Tooltip>
             <TooltipTrigger asChild>
               <Link
-                href="#"
+                to="/attendence"
                 className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
               >
                 <Package className="h-5 w-5" />
@@ -232,13 +233,7 @@ export function Layout({children}) {
                 size="icon"
                 className="overflow-hidden rounded-full"
               >
-                <img
-                  src="/placeholder-user.jpg"
-                  width={36}
-                  height={36}
-                  alt="Avatar"
-                  className="overflow-hidden rounded-full"
-                />
+               <FaRegUserCircle className="text-xl" />
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
