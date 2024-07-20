@@ -33,8 +33,9 @@ setStudentData(promise.documents)
 }
 
 useEffect(() =>{
-fetchStudentData()
+    fetchStudentData()
 },[])
+console.log(studentData)
 
 // DELETE DATA
 const studentDelete = async (student_id) => {
