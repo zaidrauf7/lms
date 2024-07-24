@@ -5,6 +5,7 @@ import { Input } from "./ui/input";
 import { useToast } from "./ui/use-toast";
 import {
   account,
+  COLLECTION_ID_STUDENTATTENDENCE,
   COLLECTION_ID_STUDENTDATA,
   DATABASE_ID,
   databases,
@@ -53,6 +54,7 @@ const Information = () => {
           'email': data?.email,
         }
       );
+
      
       console.log(data.firstname);
       setLoading(false);

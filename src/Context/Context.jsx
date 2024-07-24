@@ -65,6 +65,6 @@ const studentDelete = async (student_id) => {
     {props.children}
 </Context.Provider>
     )
-}
+}  
 
 export default ContextProvider;
