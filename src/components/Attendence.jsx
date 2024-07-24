@@ -9,8 +9,8 @@ import {
 import { Button } from "./ui/button";
 const Attendence = () => {
   return (
-    <div className="bg-[#e3e8ec] w-full h-screen">
-      <h1 className="text-lg mx-2 pt-2 font-semibold">Attendence</h1>
+    <div className="bg-white rounded-lg shadow-lg w-full h-[87vh]  p-6">
+      <h1 className='text-2xl mb-6 font-bold'>Attendence</h1>
       <div className="topBar mx-2 flex gap-6 pt-3">
         <Select>
           <SelectTrigger className="w-[180px]">
