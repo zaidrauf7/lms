@@ -101,17 +101,19 @@ const Register = () => {
           <Card x-chunk="dashboard-06-chunk-0">
             <CardHeader>
               <CardTitle>Students</CardTitle>
-              <CardDescription>
+              {/* <CardDescription>
                 Manage your products and view their sales performance.
-              </CardDescription>
+              </CardDescription> */}
             </CardHeader>
             <CardContent>
               <Table>
                 <TableHeader>
                   <TableRow>
-                    <TableHead className="hidden w-[100px] sm:table-cell">
+
+                    {/* <TableHead className="hidden w-[100px] sm:table-cell">
                       <span className="sr-only">Image</span>
-                    </TableHead>
+                    </TableHead> */}
+                    <TableHead>Student Id</TableHead>
                     <TableHead>Full Name</TableHead>
                     <TableHead>DateOfBirth</TableHead>
                     <TableHead className="hidden md:table-cell">
@@ -126,9 +128,9 @@ const Register = () => {
                     <TableHead className="hidden md:table-cell">
                       Guardian Name
                     </TableHead>
-                    <TableHead className="hidden md:table-cell">
+                    {/* <TableHead className="hidden md:table-cell">
                       Guardian Mobile
-                    </TableHead>
+                    </TableHead> */}
 
                     <TableHead>
                       <span className="sr-only">Actions</span>
@@ -137,10 +139,10 @@ const Register = () => {
                 </TableHeader>
                 <TableBody className="hell">
                   
-                    {studentData.map((stdData) => {
+                    {studentData.map((stdData , idx) => {
                       return (
                         <TableRow>
-                          <TableCell className="hidden sm:table-cell">
+                          {/* <TableCell className="hidden sm:table-cell">
                             <img
                               alt="Product image"
                               className="aspect-square rounded-md object-cover"
@@ -148,7 +150,8 @@ const Register = () => {
                               src="/placeholder.svg"
                               width="64"
                             />
-                          </TableCell>
+                          </TableCell> */}
+                          <TableCell className="hidden md:table-cell">{idx + 1}</TableCell>
                           <TableCell className="font-medium">
                             {`${stdData.firstname}${stdData.lastname}`}
                           </TableCell>
@@ -157,7 +160,7 @@ const Register = () => {
                           <TableCell className="hidden md:table-cell">{stdData.phonenumber}</TableCell>
                           <TableCell className="hidden md:table-cell">{stdData.homeaddress  }</TableCell>
                           <TableCell className="hidden md:table-cell">{stdData.guardianname}</TableCell>
-                          <TableCell className="hidden md:table-cell">{stdData.contactno}</TableCell>
+                          {/* <TableCell className="hidden md:table-cell">{stdData.contactno}</TableCell> */}
 
                           <TableCell>
                             <DropdownMenu>
@@ -184,11 +187,11 @@ const Register = () => {
                  </TableBody>
               </Table>
             </CardContent>
-            <CardFooter>
+            {/* <CardFooter>
               <div className="text-xs text-muted-foreground">
                 Showing <strong>1-10</strong> of <strong>32</strong> products
               </div>
-            </CardFooter>
+            </CardFooter> */}
           </Card>
         </TabsContent>
       </Tabs>
