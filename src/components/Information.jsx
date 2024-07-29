@@ -21,6 +21,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Link } from "react-router-dom";
+import { Select } from "./ui/select";
 
 const Information = () => {
   const [loading, setLoading] = useState(false);
@@ -40,22 +41,22 @@ const Information = () => {
         COLLECTION_ID_STUDENTDATA,
         ID.unique(),
         {
-          'firstname': data?.firstname,
-          'lastname': data?.lastname,
-          'dob': data?.dob,
-          'gender': data?.gender,
-          'phonenumber': data?.phonenumber,
-          'homeaddress': data?.homeaddress,
+          firstname: data?.firstname,
+          lastname: data?.lastname,
+          dob: data?.dob,
+          gender: data?.gender,
+          phonenumber: data?.phonenumber,
+          homeaddress: data?.homeaddress,
           // stdid: data?.stdid,
-          'guardianname': data?.guardianname,
-          'releation': data?.releation,
-          'contactno': data?.contactno,
-          'stdid': result?.$id,
-          'email': data?.email,
+          guardianname: data?.guardianname,
+          releation: data?.releation,
+          contactno: data?.contactno,
+          stdid: result?.$id,
+          email: data?.email,
+          batch: data?.batch,
         }
       );
 
-     
       console.log(data.firstname);
       setLoading(false);
       toast({
@@ -89,6 +90,7 @@ const Information = () => {
           password: "",
           fname: "",
           lname: "",
+          batch: "",
         }}
         onSubmit={onSubmit}
       >
@@ -133,14 +135,11 @@ const Information = () => {
                 </div>
                 <div className="grid gap-2">
                   <Label htmlFor="last-name">Gender</Label>
-                  <Field
-                    as={Input}
-                    id="gender"
-                    name="gender"
-                    type="text"
-                    placeholder={"Gender"}
-                    required
-                  />
+                  <Field as="select" name="gender">
+                    <option value="" label="Select a gender" />
+                    <option value="male" label="male" />
+                    <option value="female" label="female" />
+                  </Field>
                 </div>
               </div>
               <div className="grid grid-cols-2 gap-4 mb-4">
@@ -226,6 +225,20 @@ const Information = () => {
               {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
               Submit
             </Button> */}
+              <div>
+                <h1 className="text-xl font-semibold my-6">Select Batch:</h1>
+              </div>
+             <div className="grid grid-cols-2">
+             <div className="grid gap-2 ">
+                <Label htmlFor="first-name">Batch</Label>
+                <Field as="select" name="batch" className="p-2 rounded-md border border-gray-200">
+                  <option value="" label="Select a batch" />
+                  <option value="batch1" label="batch 1" />
+                  <option value="batch2" label="batch 2" />
+                  <option value="batch3" label="batch 3" />
+                </Field>
+              </div>
+             </div>
             </div>
           </div>
           <div>
