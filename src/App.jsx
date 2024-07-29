@@ -9,6 +9,7 @@ import Register from './components/Register'
 import RegisterUser from './components/RegisterUser'
 import EditStudentData from './components/EditStudentData'
 import Attendence from './components/Attendence'
+import StudentDashboard from './components/StudentDashboard'
 
 function App() {
 
@@ -16,11 +17,12 @@ function App() {
     <>
 <Routes>
 <Route element={<PrivateRoutes/>}>
-<Route path='/' element={<Homes/>}/>
+{/* <Route path='/' element={<Homes/>}/> */}
 <Route path='/registeration' element={<Register/>}/>
 <Route path='/registeration/registeruser' element={<RegisterUser/>}/>
 <Route path='/editstudent/:id' element={<EditStudentData/>}/>
 <Route path='/attendence' element={<Attendence/>}/>
+<Route path='/' element={<StudentDashboard/>}/>
 
 </Route>
 

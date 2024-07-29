@@ -1,4 +1,4 @@
-import { account, COLLECTION_ID_STUDENTDATA, DATABASE_ID, databases } from "@/Appwrite/AppwriteConfig";
+import { account, COLLECTION_ID_STUDENTATTENDENCE, COLLECTION_ID_STUDENTDATA, DATABASE_ID, databases } from "@/Appwrite/AppwriteConfig";
 import useLocalStorage from "@/hooks/useLocalStorage";
 import { createContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -25,17 +25,31 @@ const ContextProvider = (props) =>{
 const [studentData,setStudentData] = useState([])
 
 const fetchStudentData = async () =>{
-const promise = await databases.listDocuments(
-    DATABASE_ID,
-    COLLECTION_ID_STUDENTDATA
-)
-setStudentData(promise.documents)
+    const promise = await databases.listDocuments(
+        DATABASE_ID,
+        COLLECTION_ID_STUDENTDATA
+    )
+    setStudentData(promise.documents)
 }
 
+const [studentAttendence,setStudentAttendence] = useState([])
+const fetchstudentAttendence = async () =>{
+    const promise = await databases.listDocuments(
+        DATABASE_ID,
+        COLLECTION_ID_STUDENTATTENDENCE
+    )
+    setStudentAttendence(promise.documents)
+}
 useEffect(() =>{
-    fetchStudentData()
+    fetchStudentData(),
+    fetchstudentAttendence()
 },[])
-console.log(studentData)
+
+
+console.log(studentAttendence);
+
+const [present , setPresnet] = useState([])
+// console.log(studentData)
 
 // DELETE DATA
 const studentDelete = async (student_id) => {
@@ -57,7 +71,10 @@ const studentDelete = async (student_id) => {
         studentData,
         studentDelete,
         setDocumentId,
-        documentId
+        documentId,
+        studentAttendence,
+        setPresnet,
+        present,
     }
 
     return(
