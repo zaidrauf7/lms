@@ -22,6 +22,7 @@ const fetchUserInfo = async () => {
         setUserInfo(res);
         setLoader(false)
     }
+    
     catch (err) {
       console.error('Error fetching user info:', err);
       // Handle error, e.g., redirect or show an error message

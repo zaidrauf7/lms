@@ -106,9 +106,9 @@ const Register = () => {
               </CardDescription> */}
             </CardHeader>
             <CardContent>
-              <Table>
+              <Table >
                 <TableHeader>
-                  <TableRow>
+                  <TableRow >
 
                     {/* <TableHead className="hidden w-[100px] sm:table-cell">
                       <span className="sr-only">Image</span>
@@ -141,20 +141,15 @@ const Register = () => {
                   
                     {studentData.map((stdData , idx) => {
                       return (
-                        <TableRow>
-                          {/* <TableCell className="hidden sm:table-cell">
-                            <img
-                              alt="Product image"
-                              className="aspect-square rounded-md object-cover"
-                              height="64"
-                              src="/placeholder.svg"
-                              width="64"
-                            />
-                          </TableCell> */}
+                        <TableRow >
+                        
                           <TableCell className="hidden md:table-cell">{idx + 1}</TableCell>
+                          <Link to="/studentdetails" className="flex">
+
                           <TableCell className="font-medium">
                             {`${stdData.firstname}${stdData.lastname}`}
                           </TableCell>
+                          </Link> 
                           <TableCell>{stdData.dob}</TableCell>
                           <TableCell className="hidden md:table-cell">{stdData.gender}</TableCell>
                           <TableCell className="hidden md:table-cell">{stdData.phonenumber}</TableCell>
@@ -181,6 +176,7 @@ const Register = () => {
                               </DropdownMenuContent>
                             </DropdownMenu>
                           </TableCell>
+                          
                           </TableRow>
                       );
                     })}
