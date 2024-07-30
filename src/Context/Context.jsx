@@ -12,18 +12,12 @@ const ContextProvider = (props) =>{
         navigate("/login")
     }
 // GET LOGIN USER DETAIL
-
-const [loader, setLoader] = useState(false)
 const [userInfo, setUserInfo] = useState(null);
 const fetchUserInfo = async () => {
     try {
-        setLoader(true)
-        const res = await account.get();
-        setUserInfo(res);
-        setLoader(false)
-    }
-    
-    catch (err) {
+      const res = await account.get();
+      setUserInfo(res);
+    } catch (err) {
       console.error('Error fetching user info:', err);
       // Handle error, e.g., redirect or show an error message
     }
@@ -79,8 +73,7 @@ const studentDelete = async (student_id) => {
         setPresnet,
         present,
         userInfo,
-        fetchUserInfo,
-        loader,
+        fetchUserInfo
     }
     return(
 <Context.Provider value={contextValue}>
