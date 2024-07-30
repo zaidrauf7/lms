@@ -51,7 +51,7 @@ import { Context } from "@/Context/Context"
 import { FaRegUserCircle } from "react-icons/fa";
 
 export function Layout({children}) {
-  const {onLogout} = useContext(Context)
+  const {onLogout,userInfo} = useContext(Context)
   return (
     <div className="flex min-h-screen w-full flex-col bg-muted/40">
       <aside className="fixed inset-y-0 left-0 z-10 hidden w-14 flex-col border-r bg-[#1f1f1f] sm:flex">
@@ -237,7 +237,7 @@ export function Layout({children}) {
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
-              <DropdownMenuLabel>My Account</DropdownMenuLabel>
+              <DropdownMenuLabel>{userInfo ? userInfo.email : null}</DropdownMenuLabel>
               <DropdownMenuSeparator />
               <DropdownMenuItem>Settings</DropdownMenuItem>
               <DropdownMenuItem>Support</DropdownMenuItem>

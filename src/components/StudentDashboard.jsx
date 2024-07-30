@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { IoCalendarNumberOutline } from "react-icons/io5";
 import { Button } from "./ui/button";
 import {
@@ -11,6 +11,7 @@ import {
     TableHeader,
     TableRow,
   } from "@/components/ui/table"
+import { Context } from "@/Context/Context";
   const invoices = [
     {
       date: "Jul 22,2024",
@@ -40,6 +41,7 @@ import {
   ]
 
 const studentDashboard = () => {
+  const  {checkIn,userInfo,change,setChange} = useContext(Context)
   return (
     <div className="w-full h-[87vh] bg-[#eeeeee] rounded-md shadow-md p-6 ">
      <div className="flex justify-between">
@@ -49,7 +51,7 @@ const studentDashboard = () => {
 
           <IoCalendarNumberOutline className="text-3xl "/>
             </div>
-          <Button className="bg-blue-500 rounded-full">Check In</Button>
+    {change ?  <Button className="bg-blue-500 rounded-full" onClick={() => checkIn(userInfo.$id,"CheckIN")}>Check In</Button> :  <Button onClick={() => setChange(true)} className="bg-blue-500 rounded-full">Check OUT</Button> }     
         </div>
         <div className="flex justify-center items-center mt-3 font-semibold">
             <h3>Jul 25, 2024</h3>
