@@ -41,7 +41,7 @@ import {
 
 const studentDashboard = () => {
   return (
-    <div className="w-full h-[86vh] bg-[#eeeeee] rounded-md shadow-md p-6 ">
+    <div className="w-full h-[87vh] bg-[#eeeeee] rounded-md shadow-md p-6 ">
      <div className="flex justify-between">
      <div className="w-[340px] h-[200px] bg-white rounded-xl border-t-4 border-blue-500 shadow-md p-4">
         <div className="flex justify-around items-center ">
@@ -83,8 +83,6 @@ const studentDashboard = () => {
         
       </div>
       
-     </div>
-     <div>
      <div className="w-[480px] h-[200px] bg-white rounded-xl border-t-4 overflow-y-auto border-[#8c624a] shadow-md p-4">
         <div className="flex items-center gap-2">
             <div className="bg-blue-100 flex justify-center  items-center p-4 rounded-full">
@@ -99,16 +97,16 @@ const studentDashboard = () => {
        <div>
        <Table className="w-[440px]">
       <TableHeader>
-        <TableRow>
+        <TableRow className="h-4">
           <TableHead className="font-medium text-xs w-[40%]">Date</TableHead>
           <TableHead className="font-medium text-xs w-[20%]">IN</TableHead>
           <TableHead className="font-medium text-xs w-[20%]">OUT</TableHead>
           <TableHead className="text-righ text-xs w-[20%]">DURATION</TableHead>
         </TableRow>
       </TableHeader>
-      <TableBody className="w-[200px]">
+      <TableBody className="w-[200px] ">
         {invoices.map((invoice) => (
-          <TableRow className="h-6" key={invoice.invoice}>
+          <TableRow className="h-4 " key={invoice.invoice}>
             <TableCell className="font-medium text-xs">{invoice.date}</TableCell>
             <TableCell className="font-medium w-40  text-xs ">{invoice.in}</TableCell>
             <TableCell className="font-medium text-xs">{invoice.out} </TableCell>
@@ -122,8 +120,8 @@ const studentDashboard = () => {
       </TableFooter>
     </Table>
        </div>
-      </div>
      </div>
+      </div>
      
     </div>
   );
