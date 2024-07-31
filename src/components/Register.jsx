@@ -152,9 +152,11 @@ const Register = () => {
                             />
                           </TableCell> */}
                           <TableCell className="hidden md:table-cell">{idx + 1}</TableCell>
+                          <Link to="/studentdetails" className="flex">
                           <TableCell className="font-medium">
                             {`${stdData.firstname}${stdData.lastname}`}
                           </TableCell>
+                          </Link>
                           <TableCell>{stdData.dob}</TableCell>
                           <TableCell className="hidden md:table-cell">{stdData.gender}</TableCell>
                           <TableCell className="hidden md:table-cell">{stdData.phonenumber}</TableCell>
