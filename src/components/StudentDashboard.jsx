@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { IoCalendarNumberOutline } from "react-icons/io5";
 import { Button } from "./ui/button";
 import {
@@ -12,36 +12,12 @@ import {
     TableRow,
   } from "@/components/ui/table"
 import { Context } from "@/Context/Context";
-  const invoices = [
-    {
-      date: "Jul 22,2024",
-      in: "10:50 AM",
-      out: "3:10 PM",
-      duration: "9:00",
-    },
-    {
-      date: "Jul 22,2024",
-      in: "10:50 AM",
-      out: "3:10 PM",
-      duration: "9:00",
-    },
-    {
-      date: "Jul 22,2024",
-      in: "10:50 AM",
-      out: "3:10 PM",
-      duration: "9:00",
-    },
-    {
-      date: "Jul 22,2024",
-      in: "10:50 AM",
-      out: "3:10 PM",
-      duration: "9:00",
-    },
-    
-  ]
-
 const studentDashboard = () => {
-  const  {checkIn,userInfo,change,setChange} = useContext(Context)
+ 
+
+  const  {checkIn,userInfo,change,singleAttendance} = useContext(Context)
+
+
   return (
     <div className="w-full h-[87vh] bg-[#eeeeee] rounded-md shadow-md p-6 ">
      <div className="flex justify-between">
@@ -51,7 +27,7 @@ const studentDashboard = () => {
 
           <IoCalendarNumberOutline className="text-3xl "/>
             </div>
-    {change ?  <Button className="bg-blue-500 rounded-full" onClick={() => checkIn(userInfo.$id,"CheckIN")}>Check In</Button> :  <Button onClick={() => setChange(true)} className="bg-blue-500 rounded-full">Check OUT</Button> }     
+        {change ?  <Button className="bg-blue-500 rounded-full" onClick={() => checkIn(userInfo.$id,"CheckIN")}>Check In</Button> :  <Button className="bg-blue-500 rounded-full">Check OUT</Button> }     
         </div>
         <div className="flex justify-center items-center mt-3 font-semibold">
             <h3>Jul 25, 2024</h3>
@@ -107,12 +83,12 @@ const studentDashboard = () => {
         </TableRow>
       </TableHeader>
       <TableBody className="w-[200px] ">
-        {invoices.map((invoice) => (
-          <TableRow className="h-4 " key={invoice.invoice}>
-            <TableCell className="font-medium text-xs">{invoice.date}</TableCell>
-            <TableCell className="font-medium w-40  text-xs ">{invoice.in}</TableCell>
-            <TableCell className="font-medium text-xs">{invoice.out} </TableCell>
-            <TableCell className="text-right text-xs font-medium">{invoice.duration}</TableCell>
+        {singleAttendance.map((invoice) => (
+          <TableRow className="h-4 ">
+            <TableCell className="font-medium text-xs">{invoice.date.slice(0,10)}</TableCell>
+            <TableCell className="font-medium w-40  text-xs ">hello</TableCell>
+            <TableCell className="font-medium text-xs">{invoice.intime} </TableCell>
+            <TableCell className="text-right text-xs font-medium">{invoice.name}</TableCell>
           </TableRow>
         ))}
       </TableBody>

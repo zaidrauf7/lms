@@ -9,12 +9,21 @@ export const Context = createContext();
 const ContextProvider = (props) => {
     const navigate = useNavigate();
     const { removeItem } = useLocalStorage();
-    const [change,setChange] = useState(true)
+    const [change, setChange] = useState(true);
     const [loader, setLoader] = useState(false);
     const [userInfo, setUserInfo] = useState(null);
     const [studentData, setStudentData] = useState([]);
     const [studentAttendance, setStudentAttendance] = useState([]);
-
+    const [singleAttendance, setSingleAttendance] = useState([]);
+    const [time1,setTime1] = useState("");
+  
+    const getCurrentTime = () => {
+        const now = new Date();
+        const hours = String(now.getHours()).padStart(2, '0');
+        const minutes = String(now.getMinutes()).padStart(2, '0');
+        const seconds = String(now.getSeconds()).padStart(2, '0');
+        setTime1(`${hours}:${minutes}:${seconds}`);
+    };
     const onLogout = async () => {
         try {
             await account.deleteSession("current");
@@ -56,16 +65,10 @@ const ContextProvider = (props) => {
         }
     };
 
-    useEffect(() => {
-        fetchUserInfo();
-        fetchStudentData();
-        fetchStudentAttendance();
-    }, []);
-
     const studentDelete = async (student_id) => {
         try {
             await databases.deleteDocument(DATABASE_ID, COLLECTION_ID_STUDENTDATA, student_id);
-            setStudentData(prevStudent => prevStudent.filter(student => student.id !== student_id));
+            setStudentData(prevStudent => prevStudent.filter(student => student.$id !== student_id));
         } catch (err) {
             console.error('Error deleting student:', err);
         }
@@ -73,9 +76,10 @@ const ContextProvider = (props) => {
 
     const checkIn = async (id, checkin) => {
         try {
+            getCurrentTime()
+            console.log("current",time1)
             const response = await databases.listDocuments(DATABASE_ID, COLLECTION_ID_STUDENTDATA, [Query.equal("stdid", id)]);
             const documents = response.documents;
-
             await Promise.all(documents.map(doc =>
                 databases.createDocument(
                     DATABASE_ID,
@@ -85,18 +89,44 @@ const ContextProvider = (props) => {
                         stdid: doc.stdid,
                         name: `${doc.firstname} ${doc.lastname}`,
                         attendence: checkin,
-                        'date': new Date().toISOString(),
+                        date: new Date().toISOString(),
+                        intime: time1
                     }
                 )
             ));
-            setChange(false)
+            setChange(false);
         } catch (err) {
             console.error('Error checking in:', err);
         }
     };
 
+    
+    const getSingleUserAttendance = async () => {
+        try {
+            const response = await databases.listDocuments(
+                DATABASE_ID,
+                COLLECTION_ID_STUDENTATTENDENCE,
+                userInfo ? [Query.equal("stdid", userInfo.$id)] : []
+            );
+            setSingleAttendance(response.documents);
+            console.log("Attendance", singleAttendance);
+        } catch (err) {
+            console.error('Error fetching single user attendance:', err);
+        }
+    };
 
+    useEffect(() => {
+        fetchUserInfo();
+        fetchStudentData();
+        fetchStudentAttendance();
+    }, []);
 
+    useEffect(() => {
+        if (userInfo) {
+
+            getSingleUserAttendance();
+        }
+    }, [userInfo]);
 
     const contextValue = {
         onLogout,
@@ -108,7 +138,8 @@ const ContextProvider = (props) => {
         loader,
         checkIn,
         change,
-        setChange
+        setChange,
+        singleAttendance,
     };
 
     return (
