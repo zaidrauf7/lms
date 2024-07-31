@@ -14,7 +14,6 @@ const ContextProvider = (props) => {
     const [userInfo, setUserInfo] = useState(null);
     const [studentData, setStudentData] = useState([]);
     const [studentAttendance, setStudentAttendance] = useState([]);
-    const [attendenceData, setAttendenceData] = useState([]);
 
     const onLogout = async () => {
         try {
@@ -76,7 +75,6 @@ const ContextProvider = (props) => {
         try {
             const response = await databases.listDocuments(DATABASE_ID, COLLECTION_ID_STUDENTDATA, [Query.equal("stdid", id)]);
             const documents = response.documents;
-            setAttendenceData(documents);
 
             await Promise.all(documents.map(doc =>
                 databases.createDocument(
@@ -96,6 +94,9 @@ const ContextProvider = (props) => {
             console.error('Error checking in:', err);
         }
     };
+
+
+
 
     const contextValue = {
         onLogout,
