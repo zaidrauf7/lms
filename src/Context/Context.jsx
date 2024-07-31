@@ -24,6 +24,8 @@ const ContextProvider = (props) => {
         const seconds = String(now.getSeconds()).padStart(2, '0');
         setTime1(`${hours}:${minutes}:${seconds}`);
     };
+    const [documentId, setDocumentId] = useState("");
+
     const onLogout = async () => {
         try {
             await account.deleteSession("current");
@@ -140,6 +142,8 @@ const ContextProvider = (props) => {
         change,
         setChange,
         singleAttendance,
+        documentId, 
+        setDocumentId
     };
 
     return (

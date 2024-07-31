@@ -135,15 +135,12 @@ const EditStudentData = () => {
                   />
                 </div>
                 <div className="grid gap-2">
-                  <Label htmlFor="gender">Gender</Label>
-                  <Field
-                    as={Input}
-                    id="gender"
-                    name="gender"
-                    type="text"
-                    placeholder="Gender"
-                    required
-                  />
+                <Label htmlFor="last-name">Gender</Label>
+                  <Field as="select" name="gender">
+                    <option value="" label="Select a gender" />
+                    <option value="male" label="male" />
+                    <option value="female" label="female" />
+                  </Field>
                 </div>
               </div>
               <div className="grid grid-cols-2 gap-4 mb-4">
