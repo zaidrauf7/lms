@@ -14,6 +14,7 @@ const ContextProvider = (props) => {
     const [userInfo, setUserInfo] = useState(null);
     const [studentData, setStudentData] = useState([]);
     const [studentAttendance, setStudentAttendance] = useState([]);
+    const [documentId, setDocumentId] = useState("");
 
     const onLogout = async () => {
         try {
@@ -108,7 +109,9 @@ const ContextProvider = (props) => {
         loader,
         checkIn,
         change,
-        setChange
+        setChange,
+        documentId, 
+        setDocumentId
     };
 
     return (

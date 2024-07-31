@@ -1,20 +1,11 @@
-import React, { useContext } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import {
   File,
-  Home,
-  LineChart,
   ListFilter,
+  Loader2,
   MoreHorizontal,
-  Package,
-  Package2,
-  PanelLeft,
   PlusCircle,
-  Search,
-  Settings,
-  ShoppingCart,
-  Users2,
 } from "lucide-react";
-
 import { Badge } from "@/components/ui/badge";
 import {
   Table,
@@ -37,8 +28,6 @@ import {
 import {
   Card,
   CardContent,
-  CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
@@ -47,7 +36,14 @@ import { Link } from "react-router-dom";
 import { Context } from "@/Context/Context";
 
 const Register = () => {
-  const { studentData,studentDelete,setDocumentId } = useContext(Context);
+  const { studentData, studentDelete, setDocumentId } = useContext(Context);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    if (studentData.length > 0) {
+      setLoading(false);
+    }
+  }, [studentData]);
 
   return (
     <div className="w-full">
@@ -101,99 +97,65 @@ const Register = () => {
           <Card x-chunk="dashboard-06-chunk-0">
             <CardHeader>
               <CardTitle>Students</CardTitle>
-              {/* <CardDescription>
-                Manage your products and view their sales performance.
-              </CardDescription> */}
             </CardHeader>
             <CardContent>
-              <Table>
-                <TableHeader>
-                  <TableRow>
-
-                    {/* <TableHead className="hidden w-[100px] sm:table-cell">
-                      <span className="sr-only">Image</span>
-                    </TableHead> */}
-                    <TableHead>Student Id</TableHead>
-                    <TableHead>Full Name</TableHead>
-                    <TableHead>DateOfBirth</TableHead>
-                    <TableHead className="hidden md:table-cell">
-                      Gender
-                    </TableHead>
-                    <TableHead className="hidden md:table-cell">
-                      Std Mobile
-                    </TableHead>
-                    <TableHead className="hidden md:table-cell">
-                      Address
-                    </TableHead>
-                    <TableHead className="hidden md:table-cell">
-                      Guardian Name
-                    </TableHead>
-                    {/* <TableHead className="hidden md:table-cell">
-                      Guardian Mobile
-                    </TableHead> */}
-
-                    <TableHead>
-                      <span className="sr-only">Actions</span>
-                    </TableHead>
-                  </TableRow>
-                </TableHeader>
-                <TableBody className="hell">
-                  
-                    {studentData.map((stdData , idx) => {
-                      return (
-                        <TableRow>
-                          {/* <TableCell className="hidden sm:table-cell">
-                            <img
-                              alt="Product image"
-                              className="aspect-square rounded-md object-cover"
-                              height="64"
-                              src="/placeholder.svg"
-                              width="64"
-                            />
-                          </TableCell> */}
-                          <TableCell className="hidden md:table-cell">{idx + 1}</TableCell>
-                          <Link to="/studentdetails" className="flex">
-                          <TableCell className="font-medium">
-                            {`${stdData.firstname}${stdData.lastname}`}
-                          </TableCell>
+              {loading ? (
+               <div className="w-full flex justify-center"><Loader2 className="mr-2 h-8 w-8  animate-spin" /></div>
+              ) : (
+                <Table>
+                  <TableHeader>
+                    <TableRow>
+                      <TableHead className="hidden md:table-cell">Student Id</TableHead>
+                      <TableHead>Full Name</TableHead>
+                      <TableHead>DateOfBirth</TableHead>
+                      <TableHead className="hidden md:table-cell">Gender</TableHead>
+                      <TableHead className="hidden md:table-cell">Std Mobile</TableHead>
+                      <TableHead className="hidden md:table-cell">Address</TableHead>
+                      <TableHead className="hidden md:table-cell">Guardian Name</TableHead>
+                      <TableHead>
+                        <span className="sr-only">Actions</span>
+                      </TableHead>
+                    </TableRow>
+                  </TableHeader>
+                  <TableBody>
+                    {studentData.map((stdData, idx) => (
+                      <TableRow key={stdData.stdid}>
+                        <TableCell className="hidden md:table-cell">{idx + 1}</TableCell>
+                          <Link to={`/studentdetails/${stdData.stdid}`} className="font-medium">
+                        <TableCell>
+                           <a className="underline hover:text-blue-500"> {`${stdData.firstname} ${stdData.lastname}`}</a>
+                        </TableCell>
                           </Link>
-                          <TableCell>{stdData.dob}</TableCell>
-                          <TableCell className="hidden md:table-cell">{stdData.gender}</TableCell>
-                          <TableCell className="hidden md:table-cell">{stdData.phonenumber}</TableCell>
-                          <TableCell className="hidden md:table-cell">{stdData.homeaddress  }</TableCell>
-                          <TableCell className="hidden md:table-cell">{stdData.guardianname}</TableCell>
-                          {/* <TableCell className="hidden md:table-cell">{stdData.contactno}</TableCell> */}
-
-                          <TableCell>
-                            <DropdownMenu>
-                              <DropdownMenuTrigger asChild>
-                                <Button
-                                  aria-haspopup="true"
-                                  size="icon"
-                                  variant="ghost"
-                                >
-                                  <MoreHorizontal className="h-4 w-4" />
-                                  <span className="sr-only">Toggle menu</span>
-                                </Button>
-                              </DropdownMenuTrigger>
-                              <DropdownMenuContent align="end">
-                                <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                                <DropdownMenuItem onClick={() => setDocumentId(stdData.$id)}><Link to={`/editstudent/${stdData.stdid}`}>Edit</Link></DropdownMenuItem>
-                                <DropdownMenuItem onClick={() => studentDelete(stdData.$id)} >Delete</DropdownMenuItem>
-                              </DropdownMenuContent>
-                            </DropdownMenu>
-                          </TableCell>
-                          </TableRow>
-                      );
-                    })}
-                 </TableBody>
-              </Table>
+                        <TableCell>{stdData.dob}</TableCell>
+                        <TableCell className="hidden md:table-cell">{stdData.gender}</TableCell>
+                        <TableCell className="hidden md:table-cell">{stdData.phonenumber}</TableCell>
+                        <TableCell className="hidden md:table-cell">{stdData.homeaddress}</TableCell>
+                        <TableCell className="hidden md:table-cell">{stdData.guardianname}</TableCell>
+                        <TableCell>
+                          <DropdownMenu>
+                            <DropdownMenuTrigger asChild>
+                              <Button aria-haspopup="true" size="icon" variant="ghost">
+                                <MoreHorizontal className="h-4 w-4" />
+                                <span className="sr-only">Toggle menu</span>
+                              </Button>
+                            </DropdownMenuTrigger>
+                            <DropdownMenuContent align="end">
+                              <DropdownMenuLabel>Actions</DropdownMenuLabel>
+                              <DropdownMenuItem onClick={() => setDocumentId(stdData.$id)}>
+                                <Link to={`/editstudent/${stdData.stdid}`}>Edit</Link>
+                              </DropdownMenuItem>
+                              <DropdownMenuItem onClick={() => studentDelete(stdData.$id)}>
+                                Delete
+                              </DropdownMenuItem>
+                            </DropdownMenuContent>
+                          </DropdownMenu>
+                        </TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
+              )}
             </CardContent>
-            {/* <CardFooter>
-              <div className="text-xs text-muted-foreground">
-                Showing <strong>1-10</strong> of <strong>32</strong> products
-              </div>
-            </CardFooter> */}
           </Card>
         </TabsContent>
       </Tabs>
