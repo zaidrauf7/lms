@@ -15,8 +15,8 @@ import { Context } from "@/Context/Context";
 const studentDashboard = () => {
  
 
-  const  {checkIn,userInfo,change,singleAttendance} = useContext(Context)
-
+  const  {checkIn,userInfo,change,singleAttendance,checkOut} = useContext(Context)
+console.log(singleAttendance)
 
   return (
     <div className="w-full h-[87vh] bg-[#eeeeee] rounded-md shadow-md p-6 ">
@@ -27,7 +27,7 @@ const studentDashboard = () => {
 
           <IoCalendarNumberOutline className="text-3xl "/>
             </div>
-        {change ?  <Button className="bg-blue-500 rounded-full" onClick={() => checkIn(userInfo.$id,"CheckIN")}>Check In</Button> :  <Button className="bg-blue-500 rounded-full">Check OUT</Button> }     
+        {change ?  <Button className="bg-blue-500 rounded-full" onClick={() => checkIn(userInfo.$id,"CheckIN")}>Check In</Button> :  <Button onClick={() => checkOut()} className="bg-blue-500 rounded-full">Check OUT</Button> }     
         </div>
         <div className="flex justify-center items-center mt-3 font-semibold">
             <h3>Jul 25, 2024</h3>
@@ -86,8 +86,8 @@ const studentDashboard = () => {
         {singleAttendance.map((invoice) => (
           <TableRow className="h-4 ">
             <TableCell className="font-medium text-xs">{invoice.date.slice(0,10)}</TableCell>
-            <TableCell className="font-medium w-40  text-xs ">hello</TableCell>
             <TableCell className="font-medium text-xs">{invoice.intime} </TableCell>
+            <TableCell className="font-medium w-40  text-xs ">{invoice.outtime}</TableCell>
             <TableCell className="text-right text-xs font-medium">{invoice.name}</TableCell>
           </TableRow>
         ))}

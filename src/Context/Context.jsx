@@ -15,15 +15,6 @@ const ContextProvider = (props) => {
     const [studentData, setStudentData] = useState([]);
     const [studentAttendance, setStudentAttendance] = useState([]);
     const [singleAttendance, setSingleAttendance] = useState([]);
-    const [time1,setTime1] = useState("");
-  
-    const getCurrentTime = () => {
-        const now = new Date();
-        const hours = String(now.getHours()).padStart(2, '0');
-        const minutes = String(now.getMinutes()).padStart(2, '0');
-        const seconds = String(now.getSeconds()).padStart(2, '0');
-        setTime1(`${hours}:${minutes}:${seconds}`);
-    };
     const [documentId, setDocumentId] = useState("");
 
     const onLogout = async () => {
@@ -78,8 +69,13 @@ const ContextProvider = (props) => {
 
     const checkIn = async (id, checkin) => {
         try {
-            getCurrentTime()
-            console.log("current",time1)
+            const now = new Date();
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const seconds = String(now.getSeconds()).padStart(2, '0');
+            const currentTime = `${hours}:${minutes}:${seconds}`;
+
+            console.log("current", currentTime);
             const response = await databases.listDocuments(DATABASE_ID, COLLECTION_ID_STUDENTDATA, [Query.equal("stdid", id)]);
             const documents = response.documents;
             await Promise.all(documents.map(doc =>
@@ -92,7 +88,7 @@ const ContextProvider = (props) => {
                         name: `${doc.firstname} ${doc.lastname}`,
                         attendence: checkin,
                         date: new Date().toISOString(),
-                        intime: time1
+                        intime: currentTime
                     }
                 )
             ));
@@ -102,7 +98,46 @@ const ContextProvider = (props) => {
         }
     };
 
-    
+
+    const checkOut = async () => {
+        try {
+            // Fetch the latest single user attendance before updating
+            const response = await databases.listDocuments(
+                DATABASE_ID,
+                COLLECTION_ID_STUDENTATTENDENCE,
+                userInfo ? [Query.equal("stdid", userInfo.$id)] : []
+            );
+
+            const attendanceRecords = response.documents;
+
+            if (attendanceRecords.length === 0) {
+                console.error('No attendance records found for checkout.');
+                return;
+            }
+
+            const lastAttendance = attendanceRecords[attendanceRecords.length - 1];
+            const now = new Date();
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const seconds = String(now.getSeconds()).padStart(2, '0');
+            const currentTime = `${hours}:${minutes}:${seconds}`;
+
+            console.log("current", currentTime);
+            await databases.updateDocument(
+                DATABASE_ID,
+                COLLECTION_ID_STUDENTATTENDENCE,
+                lastAttendance.$id,
+                {
+                    outtime: currentTime
+                }
+            );
+            setChange(true);
+        } catch (err) {
+            console.error('Error checking out:', err);
+        }
+    };
+
+
     const getSingleUserAttendance = async () => {
         try {
             const response = await databases.listDocuments(
@@ -111,7 +146,7 @@ const ContextProvider = (props) => {
                 userInfo ? [Query.equal("stdid", userInfo.$id)] : []
             );
             setSingleAttendance(response.documents);
-            console.log("Attendance", singleAttendance);
+            console.log("Attendance", response.documents);
         } catch (err) {
             console.error('Error fetching single user attendance:', err);
         }
@@ -125,7 +160,6 @@ const ContextProvider = (props) => {
 
     useEffect(() => {
         if (userInfo) {
-
             getSingleUserAttendance();
         }
     }, [userInfo]);
@@ -142,8 +176,9 @@ const ContextProvider = (props) => {
         change,
         setChange,
         singleAttendance,
-        documentId, 
-        setDocumentId
+        documentId,
+        setDocumentId,
+        checkOut
     };
 
     return (
