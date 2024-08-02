@@ -26,6 +26,8 @@ const Attendence = () => {
          <h1>{val.name}</h1>
          <h1>{val.date.slice(0 , 10)}</h1>
          <h1>{val.intime}</h1>
+         <h1>{val.outtime}</h1>
+         <h1>{val.duration}</h1>
        </div>
       )
     })}

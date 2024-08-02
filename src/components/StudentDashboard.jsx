@@ -76,10 +76,10 @@ console.log(singleAttendance)
        <Table className="w-[440px]">
       <TableHeader>
         <TableRow className="h-4">
-          <TableHead className="font-medium text-xs w-[40%]">Date</TableHead>
+          <TableHead className="font-medium text-xs w-[35%]">Date</TableHead>
           <TableHead className="font-medium text-xs w-[20%]">IN</TableHead>
           <TableHead className="font-medium text-xs w-[20%]">OUT</TableHead>
-          <TableHead className="text-righ text-xs w-[20%]">DURATION</TableHead>
+          <TableHead className="text-righ text-xs w-[25%]">DURATION</TableHead>
         </TableRow>
       </TableHeader>
       <TableBody className="w-[200px] ">
@@ -88,7 +88,7 @@ console.log(singleAttendance)
             <TableCell className="font-medium text-xs">{invoice.date.slice(0,10)}</TableCell>
             <TableCell className="font-medium text-xs">{invoice.intime} </TableCell>
             <TableCell className="font-medium w-40  text-xs ">{invoice.outtime}</TableCell>
-            <TableCell className="text-right text-xs font-medium">{invoice.name}</TableCell>
+            <TableCell className="text-right text-xs font-medium">{invoice.duration}</TableCell>
           </TableRow>
         ))}
       </TableBody>
