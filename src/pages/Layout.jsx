@@ -49,6 +49,8 @@ import { TooltipProvider } from "@radix-ui/react-tooltip"
 import { useContext } from "react"
 import { Context } from "@/Context/Context"
 import { FaRegUserCircle } from "react-icons/fa";
+import { RiUserAddLine } from "react-icons/ri";
+import { PiUsersThreeBold } from "react-icons/pi";
 
 export function Layout({children}) {
   const {onLogout,userInfo} = useContext(Context)
@@ -82,7 +84,7 @@ export function Layout({children}) {
                 to="/registeration"
                 className="flex h-9 w-9 items-center justify-center rounded-lg  text-muted-foreground transition-colors hover:text-white md:h-8 md:w-8"
               >
-                <ShoppingCart className="h-5 w-5" />
+                <RiUserAddLine gCart className="h-5 w-5" />
                 <span className="sr-only">Registeration</span>
               </Link>
             </TooltipTrigger>
@@ -94,7 +96,7 @@ export function Layout({children}) {
                 to="/attendence"
                 className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-white md:h-8 md:w-8"
               >
-                <Package className="h-5 w-5" />
+                <PiUsersThreeBold className="h-5 w-5" />
                 <span className="sr-only">Attendence</span>
               </Link>
             </TooltipTrigger>
@@ -199,7 +201,7 @@ export function Layout({children}) {
               </nav>
             </SheetContent>
           </Sheet>
-          <Breadcrumb className="hidden md:flex">
+          {/* <Breadcrumb className="hidden md:flex">
             <BreadcrumbList>
               <BreadcrumbItem>
                 <BreadcrumbLink asChild>
@@ -217,7 +219,7 @@ export function Layout({children}) {
                 <BreadcrumbPage>All Products</BreadcrumbPage>
               </BreadcrumbItem>
             </BreadcrumbList>
-          </Breadcrumb>
+          </Breadcrumb> */}
           <div className="relative ml-auto flex-1 md:grow-0">
             <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
             <Input
