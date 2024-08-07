@@ -18,7 +18,7 @@ const Attendence = () => {
   useEffect(()=>{
     attendence()
   },[])
-  console.log(getData);
+  console.log("GETDATA",getData);
   return <div>
     {getData.map((val) =>{
       return(
